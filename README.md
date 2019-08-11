@@ -30,7 +30,3 @@ where `proto-path` is path to .proto files, relative to cwd, `out-path` - output
 - `public` - optional, defaults to false, opposite of the "private" field of the generated package.json;
 - `scope` - optional, defaults to "pb2ts", scope for the generated package;
 - `readme` - optional, defaults to `true`, if set to false the readme is not generated;
-
-## TODO
-
-- [ ] Absolute path support;

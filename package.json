@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
-    "build": "rm -fr ./dist && mkdir ./dist && cp -fr ./src/templates/ ./dist/templates && tsc",
+    "build": "rm -fr ./dist && mkdir ./dist && cp -fr ./src/templates/ ./dist/templates && tsc && chmod +x ./dist/index.js",
     "prepublishOnly": "yarn build"
   },
   "dependencies": {

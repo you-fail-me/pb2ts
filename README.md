@@ -33,6 +33,6 @@ where `proto-path` is path to .proto files, relative to cwd, `out-path` - output
 
 ## TODO:
 
-- [] Absolute path support;
-- [] Use `scope` parameter;
-- [] Use `manifest` and `readme` flags.
+- [ ] Absolute path support;
+- [ ] Use `scope` parameter;
+- [ ] Use `manifest` and `readme` flags.

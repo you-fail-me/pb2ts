@@ -41,7 +41,7 @@ const main = async () => {
     license: args['license'],
     version: args['version'],
     public: !!args['public'],
-    scope: defaults.scope,
+    scope: args.scope || defaults.scope,
     readme: args.readme === false ? false : true,
     manifest: args.manifest === false ? false : true,
   };

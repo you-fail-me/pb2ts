@@ -211,7 +211,7 @@ const main = async () => {
 
     const readme = Mustache.render(readmeTemplate, {
       serviceName: ownerPackageManifest.name,
-      proto: protoFiles,
+      proto: protoFiles.map(f => path.relative(cwd, f)),
       timestamp: new Date().toUTCString(),
     });
 

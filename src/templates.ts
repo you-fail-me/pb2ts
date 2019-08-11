@@ -1,21 +1,25 @@
 const templates = {
   import: {
     cjs: {
-      default: (name: string, filePath: string) => `const ${name} = require('${filePath}');`
+      default: (name: string, filePath: string) =>
+        `const ${name} = require('${filePath}');`,
     },
     esm: {
-      named: (name: string, filePath: string) => `import * as ${name} from '${filePath}';`
-    }
+      named: (name: string, filePath: string) =>
+        `import * as ${name} from '${filePath}';`,
+    },
   },
   export: {
     cjs: {
-      named: (name: string) => `module.exports.${name} = ${name};`
+      named: (name: string) => `module.exports.${name} = ${name};`,
+      default: (names: string[]) =>
+        `module.exports = {${names.map(n => `...${n}`).join(', ')}};`,
     },
     esm: {
       named: (names: string[]) => `export {${names.join(', ')}};`,
-      reexport: (filePath: string) => `export * from '${filePath}';`
-    }
-  }
+      reexport: (filePath: string) => `export * from '${filePath}';`,
+    },
+  },
 };
 
 export interface Entry {
@@ -39,7 +43,7 @@ export interface ReadmeParams {
 export const constructLocalJSEntry = (entries: Entry[]) => `\
 ${entries.map(e => templates.import.cjs.default(e.name, e.filePath)).join('\n')}
 
-${templates.export.esm.named(entries.map(e => e.name))}
+${templates.export.cjs.default(entries.map(e => e.name))}
 `;
 
 export const constructLocalTSEntry = (entries: Entry[]) => `\
@@ -68,12 +72,17 @@ ${params.proto.map(p => `  - \`${p}\`;`).join('\n')}
 Generated at \`${new Date().toISOString()}\`
 `;
 
-export const constructManifest = (params: ManifestParams) => JSON.stringify({
-  name: params.name,
-  version: params.version,
-  private: !params.public,
-  license: params.license,
-  description: `Generated protobuf code for the ${params.serviceName} package`,
-  main: 'index.js',
-  types: 'index.d.ts'
-}, null, 2);
+export const constructManifest = (params: ManifestParams) =>
+  JSON.stringify(
+    {
+      name: params.name,
+      version: params.version,
+      private: !params.public,
+      license: params.license,
+      description: `Generated protobuf code for the ${params.serviceName} package`,
+      main: 'index.js',
+      types: 'index.d.ts',
+    },
+    null,
+    2
+  );

@@ -1,0 +1,8 @@
+// GENERATED CODE -- DO NOT EDIT!
+{{#entries}}
+const {{&name}} = require('{{&path}}');
+{{/entries}}
+
+{{#entries}}
+module.exports.{{&name}} = {{&name}};
+{{/entries}}

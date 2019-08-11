@@ -1,0 +1,4 @@
+// GENERATED CODE -- DO NOT EDIT!
+{{#entries}}
+export * from '{{&path}}';
+{{/entries}}

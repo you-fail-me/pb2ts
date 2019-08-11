@@ -65,8 +65,13 @@ const main = async () => {
     : `@${params.scope}/${stripScope(ownerPackageManifest.name)}`;
 
   // Use absolute paths for more transparency
-  const absoluteInputPath = path.resolve(cwd, params.protoPath);
-  const absoluteOutputPath = path.resolve(cwd, params.outPath);
+  const absoluteInputPath = path.isAbsolute(params.protoPath)
+    ? params.protoPath
+    : path.resolve(cwd, params.protoPath);
+
+  const absoluteOutputPath = path.isAbsolute(params.outPath)
+    ? params.outPath
+    : path.resolve(cwd, params.outPath);
 
   // Locate the input *.proto
   const protoFiles = await glob(`${absoluteInputPath}/*.proto`);

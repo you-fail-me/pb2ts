@@ -31,7 +31,7 @@ where `proto-path` is path to .proto files, relative to cwd, `out-path` - output
 - `scope` - optional, defaults to "pb2ts", scope for the generated package;
 - `readme` - optional, defaults to `true`, if set to false the readme is not generated;
 
-## TODO:
+## TODO
 
 - [ ] Absolute path support;
 - [ ] Use `scope` parameter;

@@ -22,8 +22,8 @@ where `proto-path` is path to .proto files, relative to cwd, `out-path` - output
 
 ### Parameters
 
-- `proto-path` - required, path to source .proto files, relative to cwd;
-- `out-path` - required, path to place the output directory, relative to cwd;
+- `proto-path` - required, path to source .proto files, relative to cwd or absolute;
+- `out-path` - required, path to place the output directory, relative to cwd or absolute;
 - `manifest` - optional, defaults to `true`, if set to false, the `package.json` file is not generated;
 - `name` - optional, defaults to package name (as per package.json) of the source project, from where the script is called, name of the generated package;
 - `license` - optional, defaults to source project license - license for the generated package;

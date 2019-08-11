@@ -7,17 +7,10 @@ import which from 'which';
 import glob from 'fast-glob';
 import pkgUp from 'pkg-up';
 import camelCase from 'camelcase';
+import Mustache from 'mustache';
 
 import { stripScope } from './utils';
 import { defaults } from './defaults';
-import {
-  constructLocalJSEntry,
-  constructLocalTSEntry,
-  constructReadme,
-  constructManifest,
-  constructRootJSEntry,
-  constructRootTSEntry,
-} from './templates';
 
 enum Errors {
   ENOPROTO = 'No *.proto files found in input directory',
@@ -128,18 +121,29 @@ const main = async () => {
 
       return {
         name: camelCase(name),
-        filePath: `./${name}`,
+        path: `./${name}`,
       };
     });
 
-    const indexjs = constructLocalJSEntry(entries);
+    const localTemplates = {
+      js: fs.readFileSync(
+        path.resolve(__dirname, './templates/local/index.js.template'),
+        'utf8'
+      ),
+      ts: fs.readFileSync(
+        path.resolve(__dirname, './templates/local/index.d.ts.template'),
+        'utf8'
+      ),
+    };
+
+    const indexjs = Mustache.render(localTemplates.js, { entries });
     fs.writeFileSync(
       path.resolve(localAbsoluteOutputPath, 'index.js'),
       indexjs
     );
 
     // Construct local index.d.ts
-    const indexdts = constructLocalTSEntry(entries);
+    const indexdts = Mustache.render(localTemplates.ts, { entries });
     fs.writeFileSync(
       path.join(localAbsoluteOutputPath, 'index.d.ts'),
       indexdts
@@ -154,32 +158,65 @@ const main = async () => {
       './' +
       path.relative(absoluteOutputPath, path.join(absoluteOutputPath, fname));
 
-    return { name, filePath };
+    return { name, path: filePath };
   });
 
+  const rootTemplates = {
+    js: fs.readFileSync(
+      path.resolve(__dirname, './templates/root/index.js.template'),
+      'utf8'
+    ),
+    ts: fs.readFileSync(
+      path.resolve(__dirname, './templates/root/index.d.ts.template'),
+      'utf8'
+    ),
+  };
+
   // Construct root index.js
-  const rootIndexjs = constructRootJSEntry(submodules);
+  const rootIndexjs = Mustache.render(rootTemplates.js, {
+    entries: submodules,
+  });
+  // const rootIndexjs = constructRootJSEntry(submodules);
   fs.writeFileSync(path.join(absoluteOutputPath, 'index.js'), rootIndexjs);
   // Construct root index.d.ts
-  const rootIndexdts = constructRootTSEntry(submodules);
+  const rootIndexdts = Mustache.render(rootTemplates.ts, {
+    entries: submodules,
+  });
+  // const rootIndexdts = constructRootTSEntry(submodules);
   fs.writeFileSync(path.join(absoluteOutputPath, 'index.d.ts'), rootIndexdts);
 
   // Construct generated package manifest
-  const manifest = constructManifest({
-    serviceName: ownerPackageManifest.name,
-    name: params.name,
-    public: params.public,
-    version: params.version!,
-    license: params.license!,
-  });
-  fs.writeFileSync(path.join(absoluteOutputPath, 'package.json'), manifest);
+  if (!!params.manifest) {
+    const manifestTemplate = fs.readFileSync(
+      path.resolve(__dirname, './templates/package.json.template'),
+      'utf8'
+    );
 
+    const manifest = Mustache.render(manifestTemplate, {
+      serviceName: ownerPackageManifest.name,
+      name: params.name,
+      private: !params.public,
+      version: params.version!,
+      license: params.license!,
+    });
+
+    fs.writeFileSync(path.join(absoluteOutputPath, 'package.json'), manifest);
+  }
   // Construct readme
-  const readme = constructReadme({
-    serviceName: ownerPackageManifest.name,
-    proto: protoFiles,
-  });
-  fs.writeFileSync(path.join(absoluteOutputPath, 'README.md'), readme);
+  if (!!params.readme) {
+    const readmeTemplate = fs.readFileSync(
+      path.resolve(__dirname, './templates/readme.md.template'),
+      'utf8'
+    );
+
+    const readme = Mustache.render(readmeTemplate, {
+      serviceName: ownerPackageManifest.name,
+      proto: protoFiles,
+      timestamp: new Date().toUTCString(),
+    });
+
+    fs.writeFileSync(path.join(absoluteOutputPath, 'README.md'), readme);
+  }
 };
 
 main().catch(e => {

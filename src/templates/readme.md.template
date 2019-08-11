@@ -1,0 +1,9 @@
+# Generated Typescript code for `{{&serviceName}}`.
+
+Source *.proto files:
+
+{{#proto}}
+ - `{{&.}}`;
+{{/proto}}
+
+Generated at `{{&timestamp}}`

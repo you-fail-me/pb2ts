@@ -1,0 +1,9 @@
+{{#entries}}
+const {{&name}} = require('{{&path}}');
+{{/entries}}
+
+module.exports = {
+  {{#entries}}
+  ...{{&name}},
+  {{/entries}}
+};

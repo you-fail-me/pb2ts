@@ -1,0 +1,9 @@
+{
+  "name": "{{&name}}",
+  "version": "{{&version}}",
+  "private": {{&private}},
+  "license": "{{&license}}",
+  "description": "Generated protobuf code for the {{&serviceName}} package",
+  "main": "index.js",
+  "types": "index.d.ts"
+}

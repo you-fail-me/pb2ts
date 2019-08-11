@@ -1,3 +1,4 @@
+// GENERATED CODE -- DO NOT EDIT!
 {{#entries}}
 import * as {{&name}} from '{{&path}}';
 {{/entries}}

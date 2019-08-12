@@ -4,7 +4,12 @@
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
-    "build": "rm -fr ./dist && mkdir ./dist && cp -fr ./src/templates/ ./dist/templates && tsc && chmod +x ./dist/index.js",
+    "build": "yarn build:cleanup && yarn build:templates && yarn build:ts && yarn build:shebang && yarn build:exec",
+    "build:shebang": "echo \"`echo \"#!/usr/bin/env node\"; cat ./dist/index.js`\" > ./dist/index.js",
+    "build:exec": "chmod +x ./dist/index.js",
+    "build:ts": "tsc",
+    "build:cleanup": "rm -fr ./dist && mkdir ./dist",
+    "build:templates": "cp -fr ./src/templates/ ./dist/templates",
     "prepublishOnly": "yarn build"
   },
   "dependencies": {

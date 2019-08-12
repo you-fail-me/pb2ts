@@ -18,7 +18,7 @@ The package exposes `pb2ts` binary which can be invoked as follows:
 pb2ts --out-path ../../generated-proto/grpc-server --proto-path ./src/proto
 ```
 
-where `proto-path` is path to .proto files, relative to cwd, `out-path` - output directory (is created if not exists, overwritten if exists).
+where `proto-path` is path to .proto files, `out-path` - output directory (is created if not exists, overwritten if exists).
 
 ### Parameters
 

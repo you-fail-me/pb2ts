@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import fs from 'fs';
 import path from 'path';
 import execa from 'execa';
@@ -132,11 +131,11 @@ const main = async () => {
 
     const localTemplates = {
       js: fs.readFileSync(
-        path.resolve(__dirname, './templates/local/index.js.template'),
+        path.resolve(__dirname, './templates/local/index.js.mustache'),
         'utf8'
       ),
       ts: fs.readFileSync(
-        path.resolve(__dirname, './templates/local/index.d.ts.template'),
+        path.resolve(__dirname, './templates/local/index.d.ts.mustache'),
         'utf8'
       ),
     };
@@ -168,11 +167,11 @@ const main = async () => {
 
   const rootTemplates = {
     js: fs.readFileSync(
-      path.resolve(__dirname, './templates/root/index.js.template'),
+      path.resolve(__dirname, './templates/root/index.js.mustache'),
       'utf8'
     ),
     ts: fs.readFileSync(
-      path.resolve(__dirname, './templates/root/index.d.ts.template'),
+      path.resolve(__dirname, './templates/root/index.d.ts.mustache'),
       'utf8'
     ),
   };
@@ -193,7 +192,7 @@ const main = async () => {
   // Construct generated package manifest
   if (!!params.manifest) {
     const manifestTemplate = fs.readFileSync(
-      path.resolve(__dirname, './templates/package.json.template'),
+      path.resolve(__dirname, './templates/package.json.mustache'),
       'utf8'
     );
 
@@ -210,7 +209,7 @@ const main = async () => {
   // Construct readme
   if (!!params.readme) {
     const readmeTemplate = fs.readFileSync(
-      path.resolve(__dirname, './templates/readme.md.template'),
+      path.resolve(__dirname, './templates/readme.md.mustache'),
       'utf8'
     );
 

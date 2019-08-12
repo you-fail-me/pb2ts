@@ -1,10 +1,32 @@
 {
   "name": "@youfailme/pb2ts",
-  "version": "0.1.0",
-  "main": "dist/index.js",
+  "version": "0.1.1",
+  "main": "./dist/index.js",
+  "description": "A primitive tool to generate Typescript code from proto definitions",
+  "files": [
+    "./dist"
+  ],
+  "repository": "https://github.com/you-fail-me/pb2ts",
+  "os": [
+    "darwin",
+    "linux"
+  ],
+  "keywords": [
+    "protobuf",
+    "protoc",
+    "typescript",
+    "ts",
+    "grpc",
+    "proto3"
+  ],
   "license": "MIT",
   "scripts": {
-    "build": "rm -fr ./dist && mkdir ./dist && cp -fr ./src/templates/ ./dist/templates && tsc && chmod +x ./dist/index.js",
+    "build": "yarn build:cleanup && yarn build:templates && yarn build:ts && yarn build:shebang && yarn build:exec",
+    "build:shebang": "echo \"`echo \"#!/usr/bin/env node\"; cat ./dist/index.js`\" > ./dist/index.js",
+    "build:exec": "chmod +x ./dist/index.js",
+    "build:ts": "tsc",
+    "build:cleanup": "rm -fr ./dist && mkdir ./dist",
+    "build:templates": "cp -fr ./src/templates/ ./dist/templates",
     "prepublishOnly": "yarn build"
   },
   "dependencies": {

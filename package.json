@@ -1,7 +1,24 @@
 {
   "name": "@youfailme/pb2ts",
   "version": "0.1.0",
-  "main": "dist/index.js",
+  "main": "./dist/index.js",
+  "description": "A primitive tool to generate Typescript code from proto definitions",
+  "files": [
+    "./dist"
+  ],
+  "repository": "https://github.com/you-fail-me/pb2ts",
+  "os": [
+    "darwin",
+    "linux"
+  ],
+  "keywords": [
+    "protobuf",
+    "protoc",
+    "typescript",
+    "ts",
+    "grpc",
+    "proto3"
+  ],
   "license": "MIT",
   "scripts": {
     "build": "yarn build:cleanup && yarn build:templates && yarn build:ts && yarn build:shebang && yarn build:exec",

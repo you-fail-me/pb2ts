@@ -77,8 +77,7 @@ const main = async () => {
   if (!protoFiles.length) {
     throw new Error(Errors.ENOPROTO);
   }
-  // Clean the output dir
-  await execa('rm', ['-fr', absoluteOutputPath]);
+  // Create the output dir
   await execa('mkdir', ['-p', absoluteOutputPath]);
 
   // Locate the necessary protoc pluginss

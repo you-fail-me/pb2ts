@@ -987,6 +987,11 @@ google-protobuf@3.5.0:
   resolved "https://registry.yarnpkg.com/google-protobuf/-/google-protobuf-3.5.0.tgz#b8cc63c74d83457bd8a9a904503c8efb26bca339"
   integrity sha1-uMxjx02DRXvYqakEUDyO+ya8ozk=
 
+google-protobuf@^3.6.1:
+  version "3.9.1"
+  resolved "https://registry.yarnpkg.com/google-protobuf/-/google-protobuf-3.9.1.tgz#87e6a16b7fb16405b515a6c6622d5ace45578d86"
+  integrity sha512-tkz7SVwBktFbqFK3teXFUY/VM57+mbUgV9bSD+sZH1ocHJ7uk7BfEWMRdU24dd0ciUDokreA7ghH2fYFIczQdw==
+
 grpc-tools@1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/grpc-tools/-/grpc-tools-1.8.0.tgz#db438dbd0cfb43d412dc02a767d5fb2193636847"
@@ -2486,6 +2491,13 @@ to-regex@^3.0.1, to-regex@^3.0.2:
     extend-shallow "^3.0.2"
     regex-not "^1.0.2"
     safe-regex "^1.1.0"
+
+ts-protoc-gen@0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/ts-protoc-gen/-/ts-protoc-gen-0.10.0.tgz#f708d99be59ad0be6bdce6f4fe893ec41757d2c9"
+  integrity sha512-EEbgDWNHK3CvcNhmib94I4HMO23qLddjLRdXW8EUE11VJxbi3n5J0l2DiX/L1pijOaPTkbEoRK+zQinKgKGqsw==
+  dependencies:
+    google-protobuf "^3.6.1"
 
 type-fest@^0.6.0:
   version "0.6.0"

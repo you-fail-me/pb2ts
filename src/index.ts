@@ -96,7 +96,7 @@ const main = async () => {
     const name = path.parse(pf).name;
     const localAbsoluteOutputPath = path.join(absoluteOutputPath, name);
 
-    fs.mkdirSync(localAbsoluteOutputPath);
+    await execa('mkdir', ['-p', localAbsoluteOutputPath]);
 
     await Promise.all([
       // JS

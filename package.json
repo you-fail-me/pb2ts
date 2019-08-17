@@ -1,6 +1,6 @@
 {
   "name": "@youfailme/pb2ts",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "main": "dist/index.js",
   "description": "A primitive tool to generate Typescript code from proto definitions",
   "files": [
@@ -35,7 +35,6 @@
     "fast-glob": "3.0.3",
     "grpc-tools": "1.8.0",
     "grpc_tools_node_protoc_ts": "2.5.4",
-    "ts-protoc-gen": "0.10.0",
     "minimist": "1.2.0",
     "mustache": "3.0.1",
     "pkg-up": "3.1.0",
